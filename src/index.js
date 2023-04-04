@@ -23,6 +23,7 @@ const COOKIES_SECRET = process.env.COOKIES_SECRET || "cookie-secret";
 
 // routing api
 const users = require('./routers/users')
+const projectInfo = require('./routers/geotechInfo')
 
 const app = express();
 ViteExpress.config({ mode: process.env.NODE_ENV })
@@ -89,8 +90,10 @@ app.get("/csrf-token", (req, res) => {
 });
 
 app.use(errorMiddleware)
+app.use('/doc', express.static(path.join(__dirname, '../documents')));
 
 app.use('/user', users)
+app.use('/add-project', projectInfo)
 
 app.use('*', (req, res) => {
   res.status(404).json({

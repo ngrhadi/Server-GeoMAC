@@ -1,0 +1,52 @@
+{
+  "negeri_my": [
+    {
+      "name": "Kedah"
+    },
+    {
+      "name": "Perak"
+    },
+    {
+      "name": "Selangor"
+    },
+    {
+      "name": "Negeri Sembilan"
+    },
+    {
+      "name": "Johor"
+    },
+    {
+      "name": "Pahang"
+    },
+    {
+      "name": "Terengganu"
+    },
+    {
+      "name": "Kelantan"
+    },
+    {
+      "name": "Wilayah Persekutuan Putrajaya"
+    },
+    {
+      "name": "Wilayah Persekutuan Kuala Lumpur"
+    },
+    {
+      "name": "Wilayah Persekutuan Labuan"
+    },
+    {
+      "name": "Sabah"
+    },
+    {
+      "name": "Sarawak"
+    },
+    {
+      "name": "Perlis"
+    },
+    {
+      "name": "Pulau Pinang"
+    },
+    {
+      "name": "Melaka"
+    }
+  ]
+}

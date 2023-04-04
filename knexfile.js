@@ -8,7 +8,7 @@ dotenv.config();
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgresql://jhos:@localhost:5432/geomad',
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: './database/migrations',
     },

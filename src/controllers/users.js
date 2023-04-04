@@ -80,12 +80,13 @@ async function loginUser(req, res, next) {
 
       const checkUserLogin = await knex('users_token').where('user_id', userInfo[0].id)
 
-      if (!checkUserLogin) {
+      if (checkUserLogin.length === 0) {
         await knex('users_token').insert({
           user_id: userInfo[0].id,
           token_string: token,
         })
       }
+
       const tokenCxrf = generateToken(res, req)
       res.cookie('_cxrf', tokenCxrf)
 
@@ -96,7 +97,8 @@ async function loginUser(req, res, next) {
         message: "Successfully signed",
         data: {
           ...userInfoReturn[0],
-          _cxrf: tokenCxrf
+          _cxrf: tokenCxrf,
+          token: token
         }
       })
     }

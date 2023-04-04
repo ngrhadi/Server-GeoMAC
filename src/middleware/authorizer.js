@@ -1,7 +1,7 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const knex = require('../../config')
 const generateJWT = require('./generateJWT');
-require('dotenv').config();
 
 module.exports = async (req, res, next) => {
   try {
@@ -13,17 +13,15 @@ module.exports = async (req, res, next) => {
 
     let newToken;
 
-
     if (curentTime > jwtExpt) { // && req.cookies._cxrf !== undefined add this if ready to production
       newToken = generateJWT(idUser)
       res.set('X-Access-Token', newToken)
-      await knex('users_token').where({ id: idUser }).update({
+      await knex('users_token').where({ user_id: idUser }).update({
         token_string: newToken
       })
     }
 
-
-    if (!token && !req.cookies._cxrf !== undefined) {
+    if (!token) { //&& !req.cookies._cxrf !== undefined
       return res.status(401).send({
         "status": false,
         "message": 'You are not Login',

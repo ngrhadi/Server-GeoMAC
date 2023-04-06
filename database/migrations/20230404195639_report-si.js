@@ -25,7 +25,8 @@ exports.up = async function (knex) {
 
     knex.schema.dropTableIfExists('gi_workshop')
       .createTable('gi_workshop', function (table) {
-        table.uuid('project_id', 36).unsigned().notNullable().primary();
+        table.increments('id_workshop').primary();
+        table.uuid('project_id', 36).unsigned();
         table.string('treatment', 2000);
         table.string('treatment_chainage', 2000);
         table.string('treatment_notes', 2000);
@@ -37,7 +38,8 @@ exports.up = async function (knex) {
       }),
     knex.schema.dropTableIfExists('gi_report_si')
       .createTable('gi_report_si', function (table) {
-        table.uuid('doc_id', 36).unsigned().notNullable().primary();
+        table.increments('id_file').primary();
+        table.uuid('doc_id', 36).unsigned();
         table.string('doc_path', 2000);
         table.string('doc_name');
         table.timestamps(true, true);

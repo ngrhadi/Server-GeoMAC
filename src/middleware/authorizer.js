@@ -15,10 +15,10 @@ module.exports = async (req, res, next) => {
 
     if (curentTime > jwtExpt) { // && req.cookies._cxrf !== undefined add this if ready to production
       newToken = generateJWT(idUser)
-      res.set('X-Access-Token', newToken)
-      await knex('users_token').where({ user_id: idUser }).update({
-        token_string: newToken
-      })
+      res.set('Authorization', newToken)
+      // await knex('users_token').where({ user_id: idUser }).update({
+      //   token_string: newToken
+      // })
     }
 
     if (!token) { //&& !req.cookies._cxrf !== undefined

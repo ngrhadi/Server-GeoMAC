@@ -24,6 +24,7 @@ const COOKIES_SECRET = process.env.COOKIES_SECRET || "cookie-secret";
 // routing api
 const users = require('./routers/users')
 const projectInfo = require('./routers/geotechInfo')
+const project = require('./routers/project')
 
 const app = express();
 ViteExpress.config({ mode: process.env.NODE_ENV })
@@ -94,6 +95,7 @@ app.use('/doc', express.static(path.join(__dirname, '../documents')));
 
 app.use('/user', users)
 app.use('/add-project', projectInfo)
+app.use('/project', project)
 
 app.use('*', (req, res) => {
   res.status(404).json({

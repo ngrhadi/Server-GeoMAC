@@ -227,9 +227,50 @@ async function postGeoFile(req, res, next) {
   }
 }
 
+
+async function getProjectInfoById(req, res, next) {
+  try {
+    const { id } = req.params
+
+    const data = await knex('gi_project').leftJoin('gi_report_si', 'id', 'gi_report_si.doc_id').select({
+      id: 'gi_project.id',
+      state: 'gi_project.state',
+      district: 'gi_project.district',
+      project_name: 'gi_project.project_name',
+      project_contractor: 'gi_project.project_contractor',
+      project_cost: 'gi_project.project_cost',
+      project_cost_geotechnical: 'gi_project.project_cost_geotechnical',
+      project_duration: 'gi_project.project_duration',
+      project_procurement_method: 'gi_project.project_procurement_method',
+      project_implementation_method: 'gi_project.project_implementation_method',
+      project_possession_date: 'gi_project.project_possession_date',
+      project_completion_date: 'gi_project.project_completion_date',
+      doc_path: 'gi_report_si.doc_path',
+      doc_name: 'gi_report_si.doc_name',
+      created_at: 'gi_report_si.created_at'
+    }).join('gi_workshop', 'id', 'gi_workshop.project_id').select({
+      treatment: 'gi_workshop.treatment',
+      instrumentation_type: 'gi_workshop.instrumentation_type',
+      treatment_chainage: 'gi_workshop.treatment_chainage',
+      treatment_notes: 'gi_workshop.treatment_notes',
+      it_chainage: 'gi_workshop.it_chainage',
+      it_notes: 'gi_workshop.it_notes',
+    }).where('id', id)
+
+    res.send({
+      status: true,
+      message: "success",
+      data: { ...data }
+    })
+  } catch (error) {
+
+  }
+}
+
 module.exports = {
   getAllInfoProject,
   postingGeoInfo,
   postGeoWorkshop,
-  postGeoFile
+  postGeoFile,
+  getProjectInfoById
 };

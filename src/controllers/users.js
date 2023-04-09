@@ -88,7 +88,7 @@ async function loginUser(req, res, next) {
       }
 
       const tokenCxrf = generateToken(res, req)
-      res.cookie('_cxrf', tokenCxrf)
+      res.cookie('_cxrf', JSON.stringify(tokenCxrf))
 
       res.set('X-Access-Token', token)
 
